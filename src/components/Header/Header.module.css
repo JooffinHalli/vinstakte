@@ -1,0 +1,9 @@
+.header {
+	background: white;
+	height: 50px;
+}
+.logo {
+	text-align: left;
+	font-size: 24px;
+	font-weight: bold;
+}

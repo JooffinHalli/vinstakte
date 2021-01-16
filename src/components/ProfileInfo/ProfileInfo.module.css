@@ -1,0 +1,23 @@
+.profileInfo, .profileInfo a {
+	color: #606060;
+}
+.profileInfo {
+	font-size: 16px;
+	font-weight: 600;
+	margin-left: 24px;
+}
+.count {
+	margin-right: 35px;
+}
+.count span {
+	font-weight: 400;
+}
+.domain {
+	font-size: 28px;
+	font-weight: 300;
+	margin-bottom: 8px;
+	margin-top: 5px;
+}
+.name {
+	margin-top: 11px;
+}

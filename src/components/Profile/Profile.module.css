@@ -1,0 +1,6 @@
+.photo {
+	margin: 0px 24px 24px 0px;
+}
+.photo img {
+	transform: scale(1.1);
+}

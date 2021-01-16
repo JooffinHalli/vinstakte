@@ -1,0 +1,9 @@
+* {
+  text-align: center;
+}
+.appWrapper {
+	background: #FAFAFA;
+}
+.profileInfo {
+	margin: 30px 0px;
+}
