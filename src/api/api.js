@@ -13,16 +13,27 @@ const makeRequest = (method, params) => {
 
 export const friendsApi = {
 	getFriendsAPI: (userId) => {
-		return makeRequest('friends.search', `user_id=${userId}&count=100&fields=nickname, screen_name, sex, bdate, city, country, timezone, photo_50, photo_100, photo_200_orig, has_mobile, contacts, education, online, relation, last_seen, status, can_write_private_message, can_see_all_posts, can_post, universities, domain`)
+		return makeRequest('friends.search', `user_id=${userId}&count=12&fields=nickname, screen_name, sex, bdate, city, country, timezone, photo_50, photo_100, photo_200_orig, has_mobile, contacts, education, online, relation, last_seen, status, can_write_private_message, can_see_all_posts, can_post, universities, domain`)
+	},
+	getFollowersAPI: (userId) => {
+		return makeRequest('users.getFollowers', `user_id=${userId}&count=12&fields=nickname, screen_name, sex, bdate, city, country, timezone, photo_50, photo_100, photo_200_orig, has_mobile, contacts, education, online, relation, last_seen, status, can_write_private_message, can_see_all_posts, can_post, universities, domain`)
 	}	
 }
 
 export const profileApi = {
 	getPhotos: (userId) => {
-		return makeRequest('photos.getAll', `count=200&owner_id=${userId}&extended=1&no_service_albums=0`)
+		return makeRequest('photos.getAll', `count=9&owner_id=${userId}&extended=1&sort=1`)
 	},
 	getUser: (userId) => {
 		return makeRequest('users.get', `user_ids=${userId}&fields=photo_200,counters,domain`)
+	},
+	getMe: () => {
+		return makeRequest('users.get', 'fields=photo_200')
+	}
+}
+export const photoApi = {
+	getPhoto: (userId, photoId) => {
+		return makeRequest('photos.getById', `photos=${userId}_${photoId}&extended=1&photo_sizes=1`)
 	}
 }
 

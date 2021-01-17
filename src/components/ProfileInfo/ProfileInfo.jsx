@@ -3,8 +3,8 @@ import 'antd/dist/antd.css';
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Row, Col, Avatar} from 'antd';
-import {getPhotos, getUser} from '../../redux/profileReducer';
-import {getFriends} from '../../redux/friendsReducer';
+import {getPhotos, getUser, getMe} from '../../redux/profileReducer';
+import {getFriends, getFollowers} from '../../redux/friendsReducer';
 import {NavLink, withRouter} from 'react-router-dom';
 
 const ProfileInfo = React.memo(props => {
@@ -17,7 +17,9 @@ const ProfileInfo = React.memo(props => {
 	useEffect(() => {
         props.getUser(userId)
         props.getPhotos(userId)
-        props.getFriends(userId);
+        props.getFriends(userId)
+        props.getFollowers(userId)
+        props.getMe()
     }, [userId])
 
 	let {friends, followers, photos} = {...props.user.counters};
@@ -51,7 +53,10 @@ const mapStateToProps = state => {
 		user: {...state.profilePage.user},
 		photos: state.profilePage.photos,
 		friends: state.friendsPage.friends,
+		followers: state.friendsPage.followers
 	}
 }
 
-export default connect(mapStateToProps, {getUser, getPhotos, getFriends})(withRouter(ProfileInfo));
+export default connect(mapStateToProps, {
+	getUser, getPhotos, getFriends, getFollowers, getMe
+})(withRouter(ProfileInfo));

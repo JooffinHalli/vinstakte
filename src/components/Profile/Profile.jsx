@@ -21,7 +21,8 @@ const Profile = React.memo(props => {
 									   		  	  id={photo.id}
 									   		  	  src={photo.sizes[4].url || photo.sizes[3].url || photo.sizes[2].url || photo.sizes[1].url || photo.sizes[0].url}
 									   		  	  order={props.photos.indexOf(photo) + 1}
-								   	   		  	  likes={photo.likes.count} /> )}
+								   	   		  	  likes={photo.likes.count}
+								   	   		  	  currentUserId={props.user.id} /> )}
 			</Row>
 		</React.Fragment>
 	)
