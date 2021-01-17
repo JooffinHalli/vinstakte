@@ -5,11 +5,13 @@ import {Row, Col, Avatar} from 'antd';
 import 'antd/dist/antd.css';
 import {getPhoto} from '../../redux/photoReducer';
 import {withRouter} from 'react-router-dom';
+import {LoadingOutlined} from '@ant-design/icons';
+
 
 
 const ImgPage = React.memo(props => {
 
-	let size = Object.values({...props.photo.sizes})[3]
+	let size = Object.values({...props.photo.sizes})[8]
 
 	let url = Object.values({...size})[1]
 
@@ -22,7 +24,10 @@ const ImgPage = React.memo(props => {
 
 	return (
 		<React.Fragment>
-			<Avatar src={url} size={400} shape='square' />
+			{props.isFetching
+			? <LoadingOutlined spin={true} />
+			: <Avatar src={url} size={400} shape='square' />
+			}
 		</React.Fragment>
 	)
 })
@@ -31,6 +36,7 @@ const mapStateToProps = state => {
 	return {
 		photo: state.photoPage.photo,
 		userId: state.profilePage.currentUserId,
+		isFetching: state.profilePage.isFetching,
 	}
 }
 

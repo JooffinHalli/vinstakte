@@ -6,6 +6,7 @@ import {Row, Col, Avatar} from 'antd';
 import {getPhotos, getUser, getMe} from '../../redux/profileReducer';
 import {getFriends, getFollowers} from '../../redux/friendsReducer';
 import {NavLink, withRouter} from 'react-router-dom';
+import {LoadingOutlined} from '@ant-design/icons';
 
 const ProfileInfo = React.memo(props => {
 
@@ -27,7 +28,10 @@ const ProfileInfo = React.memo(props => {
 	return (
 		<Row>
 			<Col span={7}>
-				<Avatar size={150} src={props.user.photo_200}/>
+				{props.isFetching
+				? <LoadingOutlined spin={true}  />
+				: <Avatar size={150} src={props.user.photo_200}/>
+				}
 			</Col>
 			<Col span={14} className={c.profileInfo}>
 				<Row className={c.domain}><span>{props.user.domain}</span></Row>
@@ -53,7 +57,8 @@ const mapStateToProps = state => {
 		user: {...state.profilePage.user},
 		photos: state.profilePage.photos,
 		friends: state.friendsPage.friends,
-		followers: state.friendsPage.followers
+		followers: state.friendsPage.followers,
+		isFetching: state.profilePage.isFetching
 	}
 }
 

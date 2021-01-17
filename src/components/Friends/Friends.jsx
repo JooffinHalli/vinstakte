@@ -5,12 +5,16 @@ import {getFriends} from '../../redux/friendsReducer';
 import {Row, Col, Avatar} from 'antd';
 import 'antd/dist/antd.css';
 import {NavLink, withRouter} from 'react-router-dom';
+import {LoadingOutlined} from '@ant-design/icons';
 
 const Friend = React.memo(props => {
 	return (
 		<Col span={3} className={c.PhotosNavCol}>
 			<NavLink to={'/' + props.id}>
-				<Avatar src={props.photo} size={100} />
+				{props.isFetching
+				? <LoadingOutlined spin={true} />
+				: <Avatar src={props.photo} size={100} />
+				}
 			</NavLink>
 		</Col>
 	)
@@ -26,7 +30,8 @@ const Friends = React.memo(props => {
 												   city={f.city ? f.city.title : null}
 												   country={f.country ? f.country.title : null}
 												   photo={f.photo_100}
-												   id={f.id} />)
+												   id={f.id}
+												   isFetching={props.isFetching} />)
 
 	return (
 		<Row>
@@ -38,7 +43,8 @@ const Friends = React.memo(props => {
 const mapStateToProps = state => {
 	return {
 		friends: state.friendsPage.friends,
-		id: state.profilePage.user.id
+		id: state.profilePage.user.id,
+		isFetching: state.profilePage.isFetching
 	}
 }
 
